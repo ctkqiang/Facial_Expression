@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView USER_IMAGE;
     private TextView USER_EMOTION, PROBABILITY;
     private Button ANALYSE, RESET;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,38 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick: RESET");
             }
         });
+    }
+
+    // TODO MAIN:
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent Data) {
+        super.onActivityResult(requestCode, resultCode, Data);
+        if (requestCode == RESULT_OK){
+            switch (requestCode){
+                case WRITE_STORAGE:
+                    CHECK_PERMISSION(requestCode);
+                    break;
+                case CAMERA:
+                    CHECK_PERMISSION(requestCode);
+                    break;
+                case SELECT_PHOTO:
+                    Uri dataUri;
+                    String path;
+                    dataUri = Data.getData();
+                    path = MyHelper.getPath(this, dataUri);
+                    if (path == null) {
+                        bitmap = MyHelper.resizePhoto(Photofile, this, dataUri, USER_IMAGE); 
+                    } else {
+                        bitmap = MyHelper.resizePhoto(Photofile, path, USER_IMAGE); 
+                    }
+
+                    if (bitmap != null){
+                        // ==========
+                    }
+                    break;
+
+            }
+        }
     }
 
     // TODO : ON_START:
@@ -179,6 +213,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case WRITE_STORAGE:
+                if (GRANT_RESULTS.length > 0 && GRANT_RESULTS[0] == PackageManager.PERMISSION_GRANTED){
+                    SELECT_IMAGE();
+                } else {
+                    REQUEST_PERMISSION(this, REQUESTCODE, R.string.storage_denied);
+                }
                 break;
         }
     }

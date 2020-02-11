@@ -74,6 +74,7 @@ public class MyHelper {
         return compressPhoto(imageFile, BitmapFactory.decodeFile(path, options));
     }
 
+    // TODO COMPRESS_PHOTO:
     private static Bitmap compressPhoto(File photoFile, Bitmap bitmap) {
         try {
             FileOutputStream fOutput = new FileOutputStream(photoFile);
