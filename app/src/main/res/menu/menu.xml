@@ -10,6 +10,13 @@
         app:showAsAction="ifRoom"
         />
 
+    <item
+        android:id="@+id/camera"
+        android:title="@string/Camera"
+        android:icon="@drawable/ic_photo_camera_black_24dp"
+        app:showAsAction="ifRoom"
+        />
+
 
     <item
         android:id="@+id/about"

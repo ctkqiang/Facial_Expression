@@ -4,11 +4,9 @@ package com.johnmelodyme.facialexpression;
  *  encourage me and say that I can ,
  *  SO I do So.
  */
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -25,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.camerakit.CameraKitView;
 import com.johnmelodyme.facialexpression.Helper.MyHelper;
-
 import java.io.File;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -62,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ANALYSE.setText(R.string.an_done);
+                Log.d(TAG, "onClick: ANALYSE");
             }
         });
     }
@@ -91,13 +89,20 @@ public class MainActivity extends AppCompatActivity {
                     .setTitleText("Version 1.0.0")
                     .setContentText("Developed by John Melody Melissa")
                     .show();
+            Log.d(TAG, "onOptionsItemSelected: ");
             return true;
         }
 
         if (ID == R.id.upload) {
+            Log.d(TAG, "onOptionsItemSelected: UPLOAD");
             return true;
         }
 
+        if (ID == R.id.camera){
+            CHECK_PERMISSION(CAMERA);
+            Log.d(TAG, "onOptionsItemSelected: CAMERA");
+            return false;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -106,11 +111,11 @@ public class MainActivity extends AppCompatActivity {
             case CAMERA:
                 int hasTheCameraPermission;
                 hasTheCameraPermission = ActivityCompat
-                        .checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA);
+                        .checkSelfPermission(this, Manifest.permission.CAMERA);
                 if (hasTheCameraPermission == PackageManager.PERMISSION_GRANTED){
                     LAUNCH_CAMERA();
                 } else {
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[] {
+                    ActivityCompat.requestPermissions(this, new String[] {
                             Manifest.permission.CAMERA
                     },REQUEST_CODE);
                 }
@@ -126,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         Photofile = MyHelper.createTempFile(Photofile);
         MEDIA = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Photo = FileProvider.getUriForFile(MainActivity.this, getPackageName()
+        Photo = FileProvider.getUriForFile(this, getPackageName()
                 + ".provider", Photofile);
         MEDIA.putExtra(MediaStore.EXTRA_OUTPUT, Photo);
         startActivityForResult(MEDIA, TAKE_PHOTO);
