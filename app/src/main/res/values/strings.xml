@@ -8,4 +8,5 @@
     <string name="an_done">Done 👌</string>
     <string name="reset">Reset 👩‍</string>
     <string name="Camera">Camera 📷</string>
+    <string name="Camera_denied">Permission For Camera is Required!</string>
 </resources>
