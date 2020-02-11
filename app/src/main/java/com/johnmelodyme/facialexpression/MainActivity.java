@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.camerakit.CameraKitView;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
@@ -27,12 +27,26 @@ public class MainActivity extends AppCompatActivity {
     private CameraKitView CameraView;
     private ImageView USER_IMAGE;
     private TextView USER_EMOTION, PROBABILITY;
+    private Button ANALYSE, RESET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Starting Application...");
+        USER_IMAGE = findViewById(R.id.user_image);
+        USER_EMOTION = findViewById(R.id.Emotion);
+        PROBABILITY =findViewById(R.id.probability);
+        ANALYSE = findViewById(R.id.analyse);
+        RESET = findViewById(R.id.reset);
+
+        ANALYSE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ANALYSE.setText(R.string.an_done);
+                ANALYSE.setText(R.string.analyse);
+            }
+        });
     }
 
     // MENU ITEMS:
