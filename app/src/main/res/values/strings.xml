@@ -4,7 +4,7 @@
     <string name="export">Export</string>
     <string name="sourcecode">Source Code</string>
     <string name="upload">Upload</string>
-    <string name="analyse">👨‍💻 Click To Analyse 👩‍💻 </string>
-    <string name="an_done">Done 👌 </string>
+    <string name="analyse">👨‍💻 Click To Analyse 👩‍💻</string>
+    <string name="an_done">Done 👌</string>
     <string name="reset">Reset 👩‍</string>
 </resources>

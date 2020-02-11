@@ -29,12 +29,14 @@
                 android:id="@+id/Emotion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/probability"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/average"
                 android:textSize="20sp" />
 
             <TextView
